@@ -8,5 +8,8 @@ def index():
 
 @app.get("/about")
 def about():
-    return "About"
+    return "About:"
 
+@app.put("/update")
+def info():
+    return {"Update":"Update"}

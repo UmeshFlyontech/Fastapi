@@ -1,0 +1,46 @@
+[
+    {
+        "label": "FastAPI",
+        "importPath": "fastapi",
+        "description": "fastapi",
+        "isExtraImport": true,
+        "detail": "fastapi",
+        "documentation": {}
+    },
+    {
+        "label": "index",
+        "kind": 2,
+        "importPath": "main",
+        "description": "main",
+        "peekOfCode": "def index():\n    return {\"Data\":{\"Name\":\"Sudip\"}}\n@app.get(\"/about\")\ndef about():\n    return \"About:\"\n@app.put(\"/update\")\ndef info():\n    return {\"Update\":\"Update\"}",
+        "detail": "main",
+        "documentation": {}
+    },
+    {
+        "label": "about",
+        "kind": 2,
+        "importPath": "main",
+        "description": "main",
+        "peekOfCode": "def about():\n    return \"About:\"\n@app.put(\"/update\")\ndef info():\n    return {\"Update\":\"Update\"}",
+        "detail": "main",
+        "documentation": {}
+    },
+    {
+        "label": "info",
+        "kind": 2,
+        "importPath": "main",
+        "description": "main",
+        "peekOfCode": "def info():\n    return {\"Update\":\"Update\"}",
+        "detail": "main",
+        "documentation": {}
+    },
+    {
+        "label": "app",
+        "kind": 5,
+        "importPath": "main",
+        "description": "main",
+        "peekOfCode": "app = FastAPI()\n@app.get(\"/\")\ndef index():\n    return {\"Data\":{\"Name\":\"Sudip\"}}\n@app.get(\"/about\")\ndef about():\n    return \"About:\"\n@app.put(\"/update\")\ndef info():\n    return {\"Update\":\"Update\"}",
+        "detail": "main",
+        "documentation": {}
+    }
+]
