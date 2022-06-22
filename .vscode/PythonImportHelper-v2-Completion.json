@@ -12,25 +12,38 @@
         "kind": 2,
         "importPath": "main",
         "description": "main",
-        "peekOfCode": "def index():\n    return {\"Data\":{\"Name\":\"Sudip\"}}\n@app.get(\"/about\")\ndef about():\n    return \"About:\"\n@app.put(\"/update\")\ndef info():\n    return {\"Update\":\"Update\"}",
+        "peekOfCode": "def index():\n    return {\"Data\":{\"Name\":\"Sudip\"}}\n@app.get(\"/blog/unpublished\")\ndef  unpublished():\n    return {\"Data\": \"All unpublished blogs\"}\n@app.get(\"/blog/{id}\")\ndef blog(id: int):\n    return {\"Data\":id}\n@app.get(\"/blog/{id}/comment\")\ndef comment(id):",
         "detail": "main",
         "documentation": {}
     },
     {
-        "label": "about",
+        "label": {
+            "name": "",
+            "kind": 2,
+            "peekOfCode": "def  unpublished():\n    return {\"Data\": \"All unpublished blogs\"}\n@app.get(\"/blog/{id}\")\ndef blog(id: int):\n    return {\"Data\":id}\n@app.get(\"/blog/{id}/comment\")\ndef comment(id):\n    return {\"Data\":{'1', '2'}}"
+        },
         "kind": 2,
         "importPath": "main",
         "description": "main",
-        "peekOfCode": "def about():\n    return \"About:\"\n@app.put(\"/update\")\ndef info():\n    return {\"Update\":\"Update\"}",
+        "peekOfCode": "def  unpublished():\n    return {\"Data\": \"All unpublished blogs\"}\n@app.get(\"/blog/{id}\")\ndef blog(id: int):\n    return {\"Data\":id}\n@app.get(\"/blog/{id}/comment\")\ndef comment(id):\n    return {\"Data\":{'1', '2'}}",
         "detail": "main",
         "documentation": {}
     },
     {
-        "label": "info",
+        "label": "blog",
         "kind": 2,
         "importPath": "main",
         "description": "main",
-        "peekOfCode": "def info():\n    return {\"Update\":\"Update\"}",
+        "peekOfCode": "def blog(id: int):\n    return {\"Data\":id}\n@app.get(\"/blog/{id}/comment\")\ndef comment(id):\n    return {\"Data\":{'1', '2'}}",
+        "detail": "main",
+        "documentation": {}
+    },
+    {
+        "label": "comment",
+        "kind": 2,
+        "importPath": "main",
+        "description": "main",
+        "peekOfCode": "def comment(id):\n    return {\"Data\":{'1', '2'}}",
         "detail": "main",
         "documentation": {}
     },
@@ -39,7 +52,7 @@
         "kind": 5,
         "importPath": "main",
         "description": "main",
-        "peekOfCode": "app = FastAPI()\n@app.get(\"/\")\ndef index():\n    return {\"Data\":{\"Name\":\"Sudip\"}}\n@app.get(\"/about\")\ndef about():\n    return \"About:\"\n@app.put(\"/update\")\ndef info():\n    return {\"Update\":\"Update\"}",
+        "peekOfCode": "app = FastAPI()\n@app.get(\"/\")\ndef index():\n    return {\"Data\":{\"Name\":\"Sudip\"}}\n@app.get(\"/blog/unpublished\")\ndef  unpublished():\n    return {\"Data\": \"All unpublished blogs\"}\n@app.get(\"/blog/{id}\")\ndef blog(id: int):\n    return {\"Data\":id}",
         "detail": "main",
         "documentation": {}
     }
