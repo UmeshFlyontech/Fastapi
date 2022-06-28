@@ -12,6 +12,7 @@ router = APIRouter(
     tags=["Users"]
 )
 
+# User repository is created to manage bigger applications and multiple files.
 get_db = database.get_db
 
 @router.post("/", response_model= schemas.ShowUser)

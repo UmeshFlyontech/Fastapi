@@ -10,6 +10,8 @@ router = APIRouter(
     tags=["Blogs"]
 )
 
+# User repository is created to manage bigger applications and multiple files.
+
 get_db = database.get_db
 
 @router.get("/", response_model= List[schemas.ShowBlog])
