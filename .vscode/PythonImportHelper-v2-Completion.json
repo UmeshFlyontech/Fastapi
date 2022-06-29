@@ -32,6 +32,14 @@
         "documentation": {}
     },
     {
+        "label": "Session",
+        "importPath": "sqlalchemy.orm",
+        "description": "sqlalchemy.orm",
+        "isExtraImport": true,
+        "detail": "sqlalchemy.orm",
+        "documentation": {}
+    },
+    {
         "label": "sessionmaker",
         "importPath": "sqlalchemy.orm",
         "description": "sqlalchemy.orm",
@@ -112,6 +120,38 @@
         "documentation": {}
     },
     {
+        "label": "HTTPException",
+        "importPath": "fastapi",
+        "description": "fastapi",
+        "isExtraImport": true,
+        "detail": "fastapi",
+        "documentation": {}
+    },
+    {
+        "label": "status",
+        "importPath": "fastapi",
+        "description": "fastapi",
+        "isExtraImport": true,
+        "detail": "fastapi",
+        "documentation": {}
+    },
+    {
+        "label": "APIRouter",
+        "importPath": "fastapi",
+        "description": "fastapi",
+        "isExtraImport": true,
+        "detail": "fastapi",
+        "documentation": {}
+    },
+    {
+        "label": "Depends",
+        "importPath": "fastapi",
+        "description": "fastapi",
+        "isExtraImport": true,
+        "detail": "fastapi",
+        "documentation": {}
+    },
+    {
         "label": "status",
         "importPath": "fastapi",
         "description": "fastapi",
@@ -176,6 +216,14 @@
         "documentation": {}
     },
     {
+        "label": "Login",
+        "importPath": "blog.schemas",
+        "description": "blog.schemas",
+        "isExtraImport": true,
+        "detail": "blog.schemas",
+        "documentation": {}
+    },
+    {
         "label": "List",
         "importPath": "typing",
         "description": "typing",
@@ -229,6 +277,38 @@
         "description": "blog.repository.blog",
         "isExtraImport": true,
         "detail": "blog.repository.blog",
+        "documentation": {}
+    },
+    {
+        "label": "datetime",
+        "importPath": "datetime",
+        "description": "datetime",
+        "isExtraImport": true,
+        "detail": "datetime",
+        "documentation": {}
+    },
+    {
+        "label": "timedelta",
+        "importPath": "datetime",
+        "description": "datetime",
+        "isExtraImport": true,
+        "detail": "datetime",
+        "documentation": {}
+    },
+    {
+        "label": "JWTError",
+        "importPath": "jose",
+        "description": "jose",
+        "isExtraImport": true,
+        "detail": "jose",
+        "documentation": {}
+    },
+    {
+        "label": "jwt",
+        "importPath": "jose",
+        "description": "jose",
+        "isExtraImport": true,
+        "detail": "jose",
         "documentation": {}
     },
     {
@@ -301,6 +381,14 @@
         "description": "passlib.context",
         "isExtraImport": true,
         "detail": "passlib.context",
+        "documentation": {}
+    },
+    {
+        "label": "router",
+        "importPath": "blog.routers.authentication",
+        "description": "blog.routers.authentication",
+        "isExtraImport": true,
+        "detail": "blog.routers.authentication",
         "documentation": {}
     },
     {
@@ -401,6 +489,24 @@
         "documentation": {}
     },
     {
+        "label": "login",
+        "kind": 2,
+        "importPath": "blog.routers.authentication",
+        "description": "blog.routers.authentication",
+        "peekOfCode": "def login(request: schemas.Login, db: Session= Depends(database.get_db)):\n    user = db.query(models.User).filter(models.User.email == request.username).first()\n    if not user:\n        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail=f\"Invalid Credentials\")\n    if not Hash.verify(user.password, request.password):\n        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail=f\"Incorrect Password\")\n    return user\n    access_token = create_access_token(data={\"sub\": user.email})\n    return {\"access_token\": access_token, \"token_type\": \"bearer\"}",
+        "detail": "blog.routers.authentication",
+        "documentation": {}
+    },
+    {
+        "label": "router",
+        "kind": 5,
+        "importPath": "blog.routers.authentication",
+        "description": "blog.routers.authentication",
+        "peekOfCode": "router = APIRouter(\n    tags = [\"Authentication\"]\n)\n@router.post(\"/login\")\ndef login(request: schemas.Login, db: Session= Depends(database.get_db)):\n    user = db.query(models.User).filter(models.User.email == request.username).first()\n    if not user:\n        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail=f\"Invalid Credentials\")\n    if not Hash.verify(user.password, request.password):\n        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail=f\"Incorrect Password\")",
+        "detail": "blog.routers.authentication",
+        "documentation": {}
+    },
+    {
         "label": "all",
         "kind": 2,
         "importPath": "blog.routers.blog",
@@ -450,7 +556,7 @@
         "kind": 5,
         "importPath": "blog.routers.blog",
         "description": "blog.routers.blog",
-        "peekOfCode": "router = APIRouter(\n    prefix = \"/blog\",\n    tags=[\"Blogs\"]\n)\nget_db = database.get_db\n@router.get(\"/\", response_model= List[schemas.ShowBlog])\ndef all(db: Session = Depends(get_db)):\n    return blog.get_all(db)\n@router.post(\"/\", status_code = status.HTTP_201_CREATED)\ndef create(request: schemas.Blog, db: Session = Depends(get_db)):",
+        "peekOfCode": "router = APIRouter(\n    prefix = \"/blog\",\n    tags=[\"Blogs\"]\n)\n# User repository is created to manage bigger applications and multiple files.\nget_db = database.get_db\n@router.get(\"/\", response_model= List[schemas.ShowBlog])\ndef all(db: Session = Depends(get_db)):\n    return blog.get_all(db)\n@router.post(\"/\", status_code = status.HTTP_201_CREATED)",
         "detail": "blog.routers.blog",
         "documentation": {}
     },
@@ -461,6 +567,42 @@
         "description": "blog.routers.blog",
         "peekOfCode": "get_db = database.get_db\n@router.get(\"/\", response_model= List[schemas.ShowBlog])\ndef all(db: Session = Depends(get_db)):\n    return blog.get_all(db)\n@router.post(\"/\", status_code = status.HTTP_201_CREATED)\ndef create(request: schemas.Blog, db: Session = Depends(get_db)):\n    return blog.create(request, db)\n@router.delete(\"/{id}\", status_code=status.HTTP_204_NO_CONTENT)\ndef destroy(id, db: Session = Depends(get_db)):\n    return blog.destroy(id, db)",
         "detail": "blog.routers.blog",
+        "documentation": {}
+    },
+    {
+        "label": "create_access_token",
+        "kind": 2,
+        "importPath": "blog.routers.token",
+        "description": "blog.routers.token",
+        "peekOfCode": "def create_access_token(data: dict):\n    to_encode = data.copy()\n    expire = datetime.utcnow() + timedelta(minutes=30)\n    to_encode.update({\"exp\": expire})\n    encoded_jwt = jwt.encode(to_encode, SECRET_KEY, algorithm=ALGORITHM)\n    return encoded_jwt",
+        "detail": "blog.routers.token",
+        "documentation": {}
+    },
+    {
+        "label": "SECRET_KEY",
+        "kind": 5,
+        "importPath": "blog.routers.token",
+        "description": "blog.routers.token",
+        "peekOfCode": "SECRET_KEY = \"09d25e094faa6ca2556c818166b7a9563b93f7099f6f0f4caa6cf63b88e8d3e7\"\nALGORITHM = \"HS256\"\nACCESS_TOKEN_EXPIRE_MINUTES = 30\ndef create_access_token(data: dict):\n    to_encode = data.copy()\n    expire = datetime.utcnow() + timedelta(minutes=30)\n    to_encode.update({\"exp\": expire})\n    encoded_jwt = jwt.encode(to_encode, SECRET_KEY, algorithm=ALGORITHM)\n    return encoded_jwt",
+        "detail": "blog.routers.token",
+        "documentation": {}
+    },
+    {
+        "label": "ALGORITHM",
+        "kind": 5,
+        "importPath": "blog.routers.token",
+        "description": "blog.routers.token",
+        "peekOfCode": "ALGORITHM = \"HS256\"\nACCESS_TOKEN_EXPIRE_MINUTES = 30\ndef create_access_token(data: dict):\n    to_encode = data.copy()\n    expire = datetime.utcnow() + timedelta(minutes=30)\n    to_encode.update({\"exp\": expire})\n    encoded_jwt = jwt.encode(to_encode, SECRET_KEY, algorithm=ALGORITHM)\n    return encoded_jwt",
+        "detail": "blog.routers.token",
+        "documentation": {}
+    },
+    {
+        "label": "ACCESS_TOKEN_EXPIRE_MINUTES",
+        "kind": 5,
+        "importPath": "blog.routers.token",
+        "description": "blog.routers.token",
+        "peekOfCode": "ACCESS_TOKEN_EXPIRE_MINUTES = 30\ndef create_access_token(data: dict):\n    to_encode = data.copy()\n    expire = datetime.utcnow() + timedelta(minutes=30)\n    to_encode.update({\"exp\": expire})\n    encoded_jwt = jwt.encode(to_encode, SECRET_KEY, algorithm=ALGORITHM)\n    return encoded_jwt",
+        "detail": "blog.routers.token",
         "documentation": {}
     },
     {
@@ -495,7 +637,7 @@
         "kind": 5,
         "importPath": "blog.routers.user",
         "description": "blog.routers.user",
-        "peekOfCode": "router = APIRouter(\n    prefix = \"/user\",\n    tags=[\"Users\"]\n)\nget_db = database.get_db\n@router.post(\"/\", response_model= schemas.ShowUser)\ndef create_user(request: schemas.User, db: Session = Depends(get_db)):\n    return user.create(db, request)\n@router.get(\"/{id}\", status_code=200, response_model= schemas.ShowUser)\ndef show(id: int, db: Session = Depends(get_db)):",
+        "peekOfCode": "router = APIRouter(\n    prefix = \"/user\",\n    tags=[\"Users\"]\n)\n# User repository is created to manage bigger applications and multiple files.\nget_db = database.get_db\n@router.post(\"/\", response_model= schemas.ShowUser)\ndef create_user(request: schemas.User, db: Session = Depends(get_db)):\n    return user.create(db, request)\n@router.get(\"/{id}\", status_code=200, response_model= schemas.ShowUser)",
         "detail": "blog.routers.user",
         "documentation": {}
     },
@@ -558,7 +700,7 @@
         "kind": 6,
         "importPath": "blog.hashing",
         "description": "blog.hashing",
-        "peekOfCode": "class Hash():\n    def bcrypt(password: str):\n        return pwd_context.hash(password)",
+        "peekOfCode": "class Hash():\n    def bcrypt(password: str):\n        return pwd_context.hash(password)\n    def verify(hashed_password, plain_passowrd):\n        return pwd_context.verify(plain_passowrd, hashed_password)",
         "detail": "blog.hashing",
         "documentation": {}
     },
@@ -567,7 +709,7 @@
         "kind": 5,
         "importPath": "blog.hashing",
         "description": "blog.hashing",
-        "peekOfCode": "pwd_context = CryptContext(schemes=[\"bcrypt\"], deprecated=\"auto\")\nclass Hash():\n    def bcrypt(password: str):\n        return pwd_context.hash(password)",
+        "peekOfCode": "pwd_context = CryptContext(schemes=[\"bcrypt\"], deprecated=\"auto\")\nclass Hash():\n    def bcrypt(password: str):\n        return pwd_context.hash(password)\n    def verify(hashed_password, plain_passowrd):\n        return pwd_context.verify(plain_passowrd, hashed_password)",
         "detail": "blog.hashing",
         "documentation": {}
     },
@@ -576,7 +718,7 @@
         "kind": 5,
         "importPath": "blog.main",
         "description": "blog.main",
-        "peekOfCode": "app = FastAPI()\nmodels.Base.metadata.create_all(engine)\napp.include_router(blog.router)\napp.include_router(user.router)",
+        "peekOfCode": "app = FastAPI()\nmodels.Base.metadata.create_all(engine)\napp.include_router(authentication.router)\napp.include_router(blog.router)\napp.include_router(user.router)",
         "detail": "blog.main",
         "documentation": {}
     },
@@ -639,7 +781,34 @@
         "kind": 6,
         "importPath": "blog.schemas",
         "description": "blog.schemas",
-        "peekOfCode": "class ShowBlog(BaseModel): # to view fields in api, it is needed to call BaseModel or Blog class instead of Blog\n    title: str\n    body: str\n    creator: ShowUser\n    class Config():\n        orm_mode = True",
+        "peekOfCode": "class ShowBlog(BaseModel): # to view fields in api, it is needed to call BaseModel or Blog class instead of Blog\n    title: str\n    body: str\n    creator: ShowUser\n    class Config():\n        orm_mode = True\nclass Login(BaseModel):\n    username: str\n    password: str\nclass Token(BaseModel):",
+        "detail": "blog.schemas",
+        "documentation": {}
+    },
+    {
+        "label": "Login",
+        "kind": 6,
+        "importPath": "blog.schemas",
+        "description": "blog.schemas",
+        "peekOfCode": "class Login(BaseModel):\n    username: str\n    password: str\nclass Token(BaseModel):\n    access_token: str\n    token_type: str\nclass TokenData(BaseModel):\n    username: str | None = None",
+        "detail": "blog.schemas",
+        "documentation": {}
+    },
+    {
+        "label": "Token",
+        "kind": 6,
+        "importPath": "blog.schemas",
+        "description": "blog.schemas",
+        "peekOfCode": "class Token(BaseModel):\n    access_token: str\n    token_type: str\nclass TokenData(BaseModel):\n    username: str | None = None",
+        "detail": "blog.schemas",
+        "documentation": {}
+    },
+    {
+        "label": "TokenData",
+        "kind": 6,
+        "importPath": "blog.schemas",
+        "description": "blog.schemas",
+        "peekOfCode": "class TokenData(BaseModel):\n    username: str | None = None",
         "detail": "blog.schemas",
         "documentation": {}
     },
