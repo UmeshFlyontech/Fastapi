@@ -1,5 +1,6 @@
 from typing import List
 from pydantic import BaseModel
+from blog.models import User
 
 
 class BlogBase(BaseModel):
@@ -26,8 +27,8 @@ class ShowUser(BaseModel):
 
 # we can mention the fields which we want to show in the class model.(either title, body or both)
 class ShowBlog(BaseModel): # to view fields in api, it is needed to call BaseModel or Blog class instead of Blog
-    title: str
-    body: str
+    # title: str
+    # body: str
     creator: ShowUser
 
     class Config():

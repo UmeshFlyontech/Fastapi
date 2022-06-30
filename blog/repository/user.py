@@ -22,3 +22,11 @@ def show(id: int, db: Session):
 def get_all(db: Session):
     user = db.query(models.User).all()
     return user
+
+def destroy(id: int, db: Session):
+    user = db.query(models.User).filter(models.User.id == id)
+    if not user.first():
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail=f"User with id {id} is not available")
+    user.delete(synchronize_session=False)
+    db.commit()
+    return "User has been deleted successfully!"
